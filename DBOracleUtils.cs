@@ -10,7 +10,6 @@ namespace DynamicTest
     {
         public static OracleConnection GetDBConnection(string host, int port, String sid, String user, String password)
         {
-            // 'Connection String' подключается напрямую к Oracle.
             string connString = "Data Source=(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = "
                  + host + ")(PORT = " + port + "))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = "
                  + sid + ")));Password=" + password + ";User ID=" + user;
