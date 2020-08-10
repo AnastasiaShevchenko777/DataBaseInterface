@@ -241,5 +241,35 @@ namespace DynamicTest
                 listBox2.Items.Remove(listBox2.SelectedItem);
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+              if(dataGridView1.Rows.Count>0)
+            {
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();// creating Excel Application           
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);// creating new WorkBook within Excel application              
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;// creating new Excelsheet in workbook             
+                app.Visible = true;// see the excel sheet behind the program                        
+                worksheet = workbook.Sheets["Лист1"];// get the reference of first sheet. By default its name is Sheet1. // store its reference to worksheet
+                worksheet = workbook.ActiveSheet;
+                worksheet.Name = "Exported";// changing the name of active sheet              
+                for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)// storing header part in Excel  
+                {
+                    worksheet.Cells[1, i] = dataGridView1.Columns[i - 1].HeaderText;
+                }
+                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++) // storing Each row and column value to excel sheet
+                {
+                    for (int j = 0; j < dataGridView1.Columns.Count; j++)
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+            }
+              else
+            {
+                MessageBox.Show("Данные не выбраны");
+            }
+            
+        }
     }
 }
